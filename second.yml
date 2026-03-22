@@ -9,4 +9,5 @@
       register: e
 
     - name: output
-      debug: e
+      debug: 
+        var: e
