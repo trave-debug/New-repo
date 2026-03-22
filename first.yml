@@ -6,3 +6,7 @@
   tasks:
     - name: running first
       shell: echo "first"
+      register: e
+
+    - name: output
+      debug: e
