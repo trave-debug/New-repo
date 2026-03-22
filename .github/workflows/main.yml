@@ -1,10 +1,33 @@
 ---
-name: test
-on: workflow_dispatch
+name: ansible output
+on: 
+  push: 
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-  build:
+  ansible1:
     runs-on: ubuntu-latest
     steps:
-      - name: print the hello
-        run: echo "Hello"
+      - name: fetch script
+        uses: actions/checkout@v3
+      - name: install ansible
+        run: |
+          sudo apt update
+          sudo apt install -y ansible
+      - name: run ansible playbook
+        run: ansible-playbook -i inventory.ini first.yml
+
+  ansible2:
+    needs: ansible1
+    runs-on: ubuntu-latest
+    steps:
+      - name: fetch script
+        uses: actions/checkout@v3
+      - name: install ansible
+        run: |
+          sudo apt update
+          sudo apt install -y ansible
+      - name: run ansible playbook
+        run: ansible-playbook -i inventory.ini second.yml

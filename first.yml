@@ -1,0 +1,8 @@
+---
+- name: first
+  hosts: all
+  gather_facts: false
+  
+  tasks:
+    - name: running first
+      shell: echo "first"
